@@ -19,7 +19,7 @@ DOMAINS = json.loads(os.environ["DOMAINS"])  #{"hostmonit.com": {"@": ["CM","CU"
 SECRETID = os.environ["SECRETID"]    #'AKIDV**********Hfo8CzfjgN'
 SECRETKEY = os.environ["SECRETKEY"]   #'ZrVs*************gqjOp1zVl'
 #默认为普通版本 不用修改
-AFFECT_NUM = 2
+AFFECT_NUM = 1
 #DNS服务商 如果使用DNSPod改为1 如果使用阿里云解析改成2  如果使用华为云解析改成3
 DNS_SERVER = 1
 #如果试用华为云解析 需要从API凭证-项目列表中获取
@@ -39,7 +39,7 @@ def get_optimization_ip():
     try:
         headers = headers = {'Content-Type': 'application/json'}
         data = {"key": KEY, "type": "v4" if RECORD_TYPE == "A" else "v6"}
-        response = requests.post('https://www.wetest.vip/api/cf2dns/get_cloudflare_ip', json=data, headers=headers)
+        response = requests.post('https://api.hostmonit.com/get_optimization_ip', json=data, headers=headers)
         if response.status_code == 200:
             return response.json()
         else:
